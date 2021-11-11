@@ -3,8 +3,8 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <div className="container-fluid  py-5">
-        <div className="row border-top border-3 my-2 border-warning">
+      <div className="container-fluid">
+        <div className="row  py-5 border-top border-3 my-2 border-warning">
           <div className="col-md-3">
             <ul className="list-group list-group-flush">
               <h5 className="list-group-item">NAVIGATE</h5>

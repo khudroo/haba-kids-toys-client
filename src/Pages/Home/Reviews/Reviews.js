@@ -36,8 +36,8 @@ const Reviews = () => {
               <div className="card">
                 <div className="card-body text-center">
                   <img
-                    className="rounded-circle"
                     className="img-fluid"
+                    className="rounded-circle"
                     src={review.image}
                     alt="review"
                   />

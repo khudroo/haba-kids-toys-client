@@ -48,7 +48,7 @@ const Products = () => {
                 <h3 className="py-3"> {product.title}</h3>
                 <p> {product.des}</p>
                 <h3 className="pb-2"> Price: $ {product.price}</h3>
-                <Link>
+                <Link to="/explore">
                   <button className="btn btn-warning text-capitalize">
                     Buy Now
                   </button>

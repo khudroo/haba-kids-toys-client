@@ -40,7 +40,7 @@ const Explore = () => {
                 <div className="border p-3 single-product">
                   <div className>
                     <img
-                      style={{ width: "auto", height: "420px" }}
+                      className="img-fluid"
                       src={product.image}
                       alt="product"
                     />
@@ -48,7 +48,7 @@ const Explore = () => {
                   <h3 className="py-2"> {product.title}</h3>
                   <p> {product.des}</p>
                   <h3 className="pb-2"> Price: $ {product.price}</h3>
-                  <Link>
+                  <Link to="/purchase">
                     <button className="btn btn-warning  text-capitalize">
                       Buy Now
                     </button>

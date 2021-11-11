@@ -7,6 +7,7 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import Home from "./Pages/Home/Home/Home";
+import Explore from "./Pages/Home/Explore/Explore";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           </Route>
           <Route path="/home">
             <Home />
+          </Route>
+          <Route path="/explore">
+            <Explore />
           </Route>
         </Switch>
       </Router>

@@ -1,36 +1,45 @@
+import { height } from "@mui/system";
 import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
+import logo from "../../../images/haba_logo1.png";
+import "./Navigation.css";
 
 const Navigation = () => {
   return (
-    <div>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              HABA KIDS TOYS
-            </Typography>
-            <Button color="inherit">Home</Button>
-            <Button color="inherit">About</Button>
-            <Button color="inherit">Login</Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
+    <div className="section-margin" id="menu-area">
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top border-bottom border-3 border-warning">
+        <div className="container">
+          <Link className="navbar-brand text-white fs-2 fw-bold" to="/">
+            <img src={logo} style={{ width: "auto", height: "60px" }} />
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarText"
+            aria-controls="navbarText"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarText">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link" aria-current="page" to="/home">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/explore">
+                  Explore
+                </Link>
+              </li>
+            </ul>
+            <span className="navbar-text text-white me-1">user name</span>
+          </div>
+        </div>
+      </nav>
     </div>
   );
 };

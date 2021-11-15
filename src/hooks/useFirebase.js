@@ -1,46 +1,86 @@
-import initializeFirebase from "../Firebase/firebase.init";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
-import { useState, useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import initializeFirebase from "../Firebase/firebase.init";
 
 // initialize firebase app
 initializeFirebase();
 
+// creating custom hook depending firebase methods
 const useFirebase = () => {
   const [user, setUser] = useState({});
   const [authError, setAuthError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [success, setSuccess] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   const auth = getAuth();
-  // Create user using email & Password
+  const googleProvider = new GoogleAuthProvider();
 
-  const registerUser = (email, password) => {
+  // create user using email & password
+  const registerUser = (email, password, name, location, history) => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setAuthError("");
+        const newUser = { email, displayName: name };
+        setUser(newUser);
+        // send name to firebase after creation
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        })
+          .then(() => {
+            // Profile updated!
+            // ...
+          })
+          .catch((error) => {
+            // An error occurred
+            // ...
+          });
+
+        const destination = location.state?.from || "/";
+        history.replace(destination);
       })
       .catch((error) => {
         setAuthError(error.message);
-       
       })
       .finally(() => setIsLoading(false));
   };
 
-  // Method for login using email & password
+  // method for login using email & password
   const loginUser = (email, password, location, history) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        setAuthError("");
+
         const destination = location?.state?.from || "/";
         history.replace(destination);
+      })
+      .catch((error) => {
+        setAuthError(error.message);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
+  // login using google
+  const signInWithGoogle = (location, history) => {
+    setIsLoading(true);
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        // const user = result.user;
+        // saveUser(user.email, user.displayName, "PUT");
         setAuthError("");
+        const destination = location?.state?.from || "/";
+        history.replace(destination);
       })
       .catch((error) => {
         setAuthError(error.message);
@@ -59,8 +99,18 @@ const useFirebase = () => {
       setIsLoading(false);
     });
     return () => unsubscribed;
-  }, []);
+  }, [auth]);
 
+  // load admin data
+  useEffect(() => {
+    fetch(
+      `https://afternoon-fortress-32990.herokuapp.com/bookings/${user.email}`
+    )
+      .then((res) => res.json())
+      .then((data) => setAdmin(data.admin));
+  }, [user.email]);
+
+  // log out method
   const logout = () => {
     setIsLoading(true);
     signOut(auth)
@@ -80,6 +130,10 @@ const useFirebase = () => {
     loginUser,
     isLoading,
     logout,
+    signInWithGoogle,
+    setSuccess,
+    success,
+    admin,
   };
 };
 

@@ -1,0 +1,27 @@
+#review {
+  background-color: rgba(121, 108, 94, 0.13);
+}
+
+#review .single-client {
+  width: 100%;
+
+}
+
+#review img {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  object-fit: cover;
+
+}
+
+.image-center{
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.font-style {
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  font-size: 30px;
+}

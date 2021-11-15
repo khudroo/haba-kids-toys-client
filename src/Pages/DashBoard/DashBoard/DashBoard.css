@@ -1,0 +1,16 @@
+#dashboard-area .c-margin {
+  margin-top: 160px;
+  margin-bottom: 10px;
+}
+#dashboard-area .c-bg {
+  background: rgb(34, 193, 195);
+  background: linear-gradient(0deg, rgb(67, 75, 75) 0%, rgba(24, 22, 31, 0.979) 100%);
+}
+
+#hoverText{
+  color: rgb(252, 252, 252);
+}
+#hoverText:hover{
+  background-color: white;
+  color: #000;
+}

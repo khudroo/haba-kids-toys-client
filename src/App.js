@@ -12,8 +12,10 @@ import Login from "./Pages/Login/Login";
 import NotFound from "./Pages/NotFound/NotFound";
 import Register from "./Pages/Register/Register";
 import AuthProvider from "./contexts/AuthProvider/AuthProvider";
-import PrivetRoutes from "./Pages/Login/PrivetRoutes/PrivetRoutes";
+import DashBoard from "./Pages/DashBoard/DashBoard/DashBoard";
+import PrivetRoute from "./Pages/Login/PrivetRoute/PrivetRoute";
 import Purchase from "./Pages/Purchase/Purchase";
+
 
 function App() {
   return (
@@ -36,9 +38,14 @@ function App() {
             <Route path="/register">
               <Register />
             </Route>
-            <PrivetRoutes path="/purchase">
+            <PrivetRoute path="/purchase/:id">
                 <Purchase />
-            </PrivetRoutes>
+            </PrivetRoute>
+
+            <PrivetRoute path="/dashboard">
+              <DashBoard />
+            </PrivetRoute>
+
             <Route path="*">
               <NotFound />
             </Route>

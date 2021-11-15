@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import logo from "../../../images/haba_logo1.png";
 import "./Navigation.css";
@@ -12,9 +12,9 @@ const Navigation = () => {
       <div className="section-margin" id="menu-area">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top border-bottom border-3 border-warning">
           <div className="container">
-            <Link className="navbar-brand text-white fs-2 fw-bold" to="/">
+            <NavLink className="navbar-brand text-white fs-2 fw-bold" to="/">
               <img src={logo} style={{ width: "auto", height: "60px" }} />
-            </Link>
+            </NavLink>
             <button
               className="navbar-toggler"
               type="button"
@@ -29,30 +29,38 @@ const Navigation = () => {
             <div className="collapse navbar-collapse" id="navbarText">
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <Link className="nav-link" aria-current="page" to="/home">
+                  <NavLink className="nav-link" aria-current="page" to="/home">
                     Home
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/explore">
+                  <NavLink className="nav-link" to="/explore">
                     Explore
-                  </Link>
+                  </NavLink>
                 </li>
                 {user?.email ? (
+                <>
                   <li className="nav-item">
-                    <Link className="nav-link" onClick={logout} to="">
-                      Logout
-                    </Link>
+                    <NavLink className="nav-link" to="/dashboard">
+                      Dashboard
+                    </NavLink>
                   </li>
-                ) : (
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/login">
-                      Login
-                    </Link>
+
+                  <li className="mx-1">
+                    <button onClick={logout} className="btn btn-outline-info text-capitalize">
+                      logout
+                    </button>
                   </li>
-                )}
-              </ul>
-              <span className="navbar-text text-white me-1">user name</span>
+                </>
+              ) : (
+                <li className="mx-1">
+                  <NavLink className="" to="/login">
+                    <button className="btn btn-warning text-capitalize">login</button>
+                  </NavLink>
+                </li>
+              )}
+            </ul>
+            {user?.email && <span className="navbar-text text-white me-1">{user?.displayName}</span>}
             </div>
           </div>
         </nav>

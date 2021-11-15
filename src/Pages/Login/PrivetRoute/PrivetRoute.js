@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 
 
-const PrivetRoutes = ({ children, ...rest }) => {
+const PrivetRoute = ({ children, ...rest }) => {
   const { user, isLoading } = useAuth();
   if (isLoading) {
     return <div className="col-md-12">
@@ -33,4 +33,4 @@ const PrivetRoutes = ({ children, ...rest }) => {
   );
 };
 
-export default PrivetRoutes;
+export default PrivetRoute;

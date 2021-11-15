@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Footer from "../../Shared/Footer/Footer";
 import Navigation from "../../Shared/Navigation/Navigation";
 
@@ -7,7 +7,7 @@ const Explore = () => {
   const [esplores, setEsplores] = useState([]);
 
   useEffect(() => {
-    fetch(`/fackData.json`)
+    fetch(`https://afternoon-fortress-32990.herokuapp.com/toys`)
       .then((res) => res.json())
       .then((data) => setEsplores(data));
   }, []);
@@ -48,11 +48,11 @@ const Explore = () => {
                   <h3 className="py-2"> {product.title}</h3>
                   <p> {product.des}</p>
                   <h3 className="pb-2"> Price: $ {product.price}</h3>
-                  <Link to="/purchase">
+                  <NavLink to={`/purchase/${product._id}`}>
                     <button className="btn btn-warning  text-capitalize">
                       Buy Now
                     </button>
-                  </Link>
+                  </NavLink>
                 </div>
               </div>
             ))}
